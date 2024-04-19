@@ -1,10 +1,20 @@
-﻿namespace ConsoleUI
+﻿using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
+
+namespace ConsoleUI
 {
-	internal class Program
+	public class Program
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello, World!");
-		}
+			EfProductDal product=new EfProductDal();
+			
+            foreach (var item in product.GetAll())
+            {
+                Console.WriteLine(item);
+            }
+        }
+
 	}
 }
