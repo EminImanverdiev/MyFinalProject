@@ -1,6 +1,10 @@
-
+﻿
+using Autofac;
+using Autofac.Core;
+using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
+using Business.DependencyResolvers.Autofac;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 
@@ -12,11 +16,16 @@ namespace WebAPI
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
+			builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+			// Call ConfigureContainer on the Host sub property 
+			builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+			{
+				builder.RegisterModule(new AutofacBussinesModule());
+			});
 			// Add services to the container.
 
 			builder.Services.AddControllers();
-			builder.Services.AddSingleton<IProductService,ProductManager>();
-			builder.Services.AddSingleton<IProductDal, EfProductDal>();
 
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
