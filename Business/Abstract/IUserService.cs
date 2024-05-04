@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.Security.JWT
+namespace Business.Abstract
 {
-	public interface ITokenHelper
+	public interface IUserService
 	{
-		AccessToken CreateToken(User user, List<OperationClaim> operationClaims);
+		List<OperationClaim> GetClaims(User user);
+		void Add(User user);
+		User GetByMail(string email);
 	}
 }

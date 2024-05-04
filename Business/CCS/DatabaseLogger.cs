@@ -6,5 +6,10 @@
 		{
 			Console.WriteLine("Veritabanina loglandi");
 		}
+
+		public void Log()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

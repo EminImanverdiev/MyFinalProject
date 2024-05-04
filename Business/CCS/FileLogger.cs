@@ -12,5 +12,10 @@ namespace Business.CCS
 		{
             Console.WriteLine("Dosyaya loglandi");
         }
+
+		public void Log()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

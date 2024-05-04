@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -25,13 +26,14 @@ namespace Business.Concrete
 	{
 		IProductDal _productDal;
 		ICategoryService _categoryService;
-        public ProductManager(IProductDal productDal,ICategoryService categoryService)
-        {
+		public ProductManager(IProductDal productDal, ICategoryService categoryService)
+		{
 			_productDal = productDal;
 			_categoryService = categoryService;
-        }
+		}
 
 		//[ValidationAspect(typeof(ProductValidator))]
+		[SecuredOperation("product.add,admin")]
 		public IResult Add(Product product)
 		{
 			IResult result = BusinessRules.Run(
